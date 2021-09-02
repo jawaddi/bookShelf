@@ -29,29 +29,28 @@ let shelfControler = (function () {
       // create new book
       let newBook = new Book(id, book.title, book.author, book.isbn);
       // add new book to our shelf
+      // check if the book in shelf or not
       let togle = false;
       if (shelf.length > 0) {
         shelf.forEach((e) => {
           console.log(e.title === newBook.title);
           if (e.title === newBook.title) {
-            console.log(0);
             togle = true;
           }
         });
+        // the book is not in the shelf
         if (!togle) {
           shelf.push(newBook);
-          console.log(1);
+          // return new book cuz we want it to display it on out user interface
           return newBook;
         } else {
           return null;
         }
       } else {
+        // first book that will enter the shelf
         shelf.push(newBook);
-        console.log(2);
-
         return newBook;
       }
-      // return new book cuz we want it to display it on out user interface
     },
     deleteBook: function (id) {
       // this id is the key for this function
@@ -70,9 +69,9 @@ let shelfControler = (function () {
         }
       });
     },
-    test: function () {
-      console.log(shelf);
-    },
+    // test: function () {
+    //   console.log(shelf);
+    // },
   };
 })();
 // manipulation our userinterface
@@ -147,7 +146,7 @@ let uiControler = (function () {
     // },
   };
 })();
-// this is the link between ui and shelf
+// this is the link between ui and shelfcontroler
 function controler(Ui, shelf) {
   Dom = Ui.dom;
   // events
@@ -171,12 +170,12 @@ function controler(Ui, shelf) {
     ) {
       // add book to our data array
       let newBook = shelf.addBook(getBookValues);
-      // diplay it
-      console.log(newBook);
+      // diplay book if it doesn't have a copy yet
       if (newBook !== null) {
         console.log(newBook);
         Ui.displaybook(newBook);
       } else {
+        // book exist in the shelf
         checkForError("this book exist!!");
       }
     } else {
@@ -187,6 +186,7 @@ function controler(Ui, shelf) {
     // clear fields
     Ui.clearFields();
   }
+  // if the book is exist or empty fields
   function checkForError(hint) {
     document.querySelector(Dom.addSuccess).innerText = hint;
     document.querySelector(Dom.addSuccess).classList.remove("d-none");
@@ -218,17 +218,6 @@ function controler(Ui, shelf) {
       shelf.deleteBook(newId);
       checkForError("book has been deleted");
     }
-    // Dom.form.reset();
   }
 }
 controler(uiControler, shelfControler);
-
-// UI Class:Handle UI Tasks
-
-// Store Class:Handle Strong
-
-// Event:Display Books
-
-// Event:Add a Book
-
-//Event:Remove a Book
