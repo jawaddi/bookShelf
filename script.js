@@ -127,7 +127,7 @@ let uiControler = (function () {
         `;
 
       // remove the class "d-none" cuz we want the user know that his book is add successful
-      document.querySelector(inputDom.addSuccess).innerText = "book added";
+      document.querySelector(inputDom.addSuccess).innerText = "book has beeb added";
       document.querySelector(inputDom.addSuccess).classList.remove("d-none");
       document.querySelector(inputDom.addSuccess).classList.remove("bg-danger");
       // add bootstrap class for background
@@ -176,7 +176,7 @@ function controler(Ui, shelf) {
         Ui.displaybook(newBook);
       } else {
         // book exist in the shelf
-        checkForError("this book exist!!");
+        checkForError("this book is exist!!");
       }
     } else {
       // if fields empty we show a messgae that your haven't added
